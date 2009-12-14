@@ -36,7 +36,7 @@ Note that this plug-in comes with the following security implications:
 = 1.0.3 =
 * December 14, 2009.
 * Fixed up readme.
-* Now available in WordPress plug-in directory.
+* Now available in the WordPress plug-in directory.
 
 = 1.0.2 =
 * December 11, 2009.
