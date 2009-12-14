@@ -31,6 +31,10 @@ Note that this plug-in comes with the following security implications:
   not), they may be able to use it to upload files, view information about
   uploaded files, or change information about uploaded files.
 
+If the benefit of having the Flash uploader available outweighs these potential
+security risks for you, then you can use this plug-in to enable the Flash
+uploader.
+
 == Changelog ==
 
 = 1.0.3 =
