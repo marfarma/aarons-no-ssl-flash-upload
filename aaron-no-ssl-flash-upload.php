@@ -3,7 +3,7 @@
 Plugin Name: Aaron's NO SSL Flash Upload
 Plugin URI: http://aaron-kelley.net/tech/wordpress/plugin-flashssl/
 Description: The Flash uploader will not use SSL, even if you have forced SSL admin sessions.  This plug-in overrides WordPress's auth_redirect and wp_parse_auth_cookie functions.  The implementations in this plug-in are based on those in WordPress 2.8.6.  I will update them as necessary until a workaround for this problem is included in WordPress or Adobe Flash.  WARNING: This will expose your authentication cookie when using the Flash uploader.  It also relaxes the authentication requirement for using async-upload.php &mdash; this may allow someone to upload files, view information about uploaded flies, or change information about uploaded files if they are able to grab your login cookie (which will be sent via any non-SSL access to your WordPress page).
-Version: 1.0.3
+Version: 1.0.4
 Author: Aaron A. Kelley
 Author URI: http://aaron-kelley.net/
 */
@@ -94,14 +94,10 @@ function auth_redirect() {
 	if ( $secure && !is_ssl() && false !== strpos($_SERVER['REQUEST_URI'], 'wp-admin') ) {
 		if ( 0 === strpos($_SERVER['REQUEST_URI'], 'http') ) {
 			wp_redirect(preg_replace('|^http://|', 'https://', $_SERVER['REQUEST_URI']));
-			if (!aaron_asyncReqDetect()) {
-			    exit();
-			}
+			if (!aaron_asyncReqDetect()) { exit(); }
 		} else {
 			wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-			if (!aaron_asyncReqDetect()) {
-			    exit();
-			}
+			if (!aaron_asyncReqDetect()) { exit(); }
 		}
 	}
 
@@ -120,15 +116,7 @@ function auth_redirect() {
 		}
 
 		return;  // The cookie is good so we're done
-	}
-	else if (aaron_asyncReqDetect()) {
-	    if ( empty($_COOKIE[LOGGED_IN_COOKIE]) || !wp_validate_auth_cookie($_COOKIE[LOGGED_IN_COOKIE], 'logged_in') ) {
-		 	wp_redirect($login_url);
-	        exit();
-		}
-
-        return;  // The cookie is good so we're done.
-	}
+	} else if (aaron_asyncReqDetect()) { if ( empty($_COOKIE[LOGGED_IN_COOKIE]) || !wp_validate_auth_cookie($_COOKIE[LOGGED_IN_COOKIE], 'logged_in') ) { wp_redirect($login_url); exit(); } return; }
 
 	// The cookie is no good so force login
 	nocache_headers();
@@ -171,10 +159,7 @@ function wp_parse_auth_cookie($cookie = '', $scheme = '') {
 				$cookie_name = LOGGED_IN_COOKIE;
 				break;
 			default:
-				if ( is_ssl() || aaron_asyncReqDetect() ) {
-				    if ( aaron_asyncReqDetect() ) {
-				        $_COOKIE[SECURE_AUTH_COOKIE] = $_REQUEST['auth_cookie'];
-				    }
+				if ( is_ssl() || aaron_asyncReqDetect() ) { if ( aaron_asyncReqDetect() && !is_ssl() ) { $_COOKIE[SECURE_AUTH_COOKIE] = $_REQUEST['auth_cookie']; }
 					$cookie_name = SECURE_AUTH_COOKIE;
 					$scheme = 'secure_auth';
 				} else {

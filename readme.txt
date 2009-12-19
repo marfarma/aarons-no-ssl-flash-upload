@@ -2,8 +2,8 @@
 Contributors: aaron44126
 Tags: flash, upload, ssl
 Requires at least: 2.8
-Tested up to: 2.8.6
-Stable tag: 1.0.3
+Tested up to: 2.9
+Stable tag: 1.0.4
 
 Turns off SSL for the Flash uploader when you have FORCE_SSL_ADMIN enabled, in
 case you are having trouble getting it to work ("IO Error").
@@ -37,18 +37,26 @@ uploader.
 
 == Changelog ==
 
+= 1.0.4 =
+* December 18, 2009
+* Fixed a bug that prevented viewing and editing media information immediately
+  after upload with WordPress 2.9.
+* Changed code in the overridden functions so that all of my changes are on one
+  line if possible.  This is to make it easier to check against the original
+  WordPress functions for changes when a new version comes along.
+
 = 1.0.3 =
-* December 14, 2009.
+* December 14, 2009
 * Fixed up readme.
 * Now available in the WordPress plug-in directory.
 
 = 1.0.2 =
-* December 11, 2009.
+* December 11, 2009
 * Fixed error activating plug-in, extra installation instructions no longer
   necessary.
 
 = 1.0.1 =
-* December 10, 2009.
+* December 10, 2009
 * Added "Installation process" section to readme, in case of errors activating
   the plug-in.
 
