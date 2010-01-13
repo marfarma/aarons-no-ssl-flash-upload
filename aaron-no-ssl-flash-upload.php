@@ -3,7 +3,7 @@
 Plugin Name: Aaron's NO SSL Flash Upload
 Plugin URI: http://aaron-kelley.net/tech/wordpress/plugin-flashssl/
 Description: Workaround an "IO error" from the Flash uploader, caused by using an untrusted SSL certificate to secure admin sessions.  This is done by disabling SSL for the Flash uploader.  See the readme for security implications.  Requires WordPress 2.9 or later.
-Version: 1.0.5
+Version: 1.0.6-pre
 Author: Aaron A. Kelley
 Author URI: http://aaron-kelley.net/
 */

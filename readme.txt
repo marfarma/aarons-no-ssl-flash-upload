@@ -15,12 +15,12 @@ have an SSL certificate that is not trusted by default (because it is self-
 signed, signed by an untrusted certificate authority, signed for a different
 domain name, etc.), then you probably have problems using the Flash uploader.
 
-This plug-in disables SSL usage by the Flash uploader.  This allows you to use
+This plugin disables SSL usage by the Flash uploader.  This allows you to use
 the Flash uploader when you have FORCE_SSL_ADMIN enabled, with an untrusted SSL
 certificate.  This works around the vague "IO Error" you get from the Flash
 uploader in such a situation.
 
-Note that this plug-in comes with the following security implications:
+Note that this plugin comes with the following security implications:
 
 * Flash uploads no longer use SSL, thus, your uploaded files aren't encrypted
   during transmission.
@@ -32,19 +32,22 @@ Note that this plug-in comes with the following security implications:
   uploaded files, or change information about uploaded files.
 
 If the benefit of having the Flash uploader available outweighs these potential
-security risks for you, then you can use this plug-in to enable the Flash
+security risks for you, then you can use this plugin to enable the Flash
 uploader.
 
-Note that this plug-in override's WordPress's auth_redirect and
+Note that this plugin override's WordPress's auth_redirect and
 wp_validate_auth_cookie functions, and may not work if you are using other
-plug-ins that override these functions.
+plugins that override these functions.
 
 == Changelog ==
+
+= Development Version =
+* Minor updates to documentation.
 
 = 1.0.5 =
 * January 4, 2010
 * Updated the auth_redirect function to match changes made in WordPress 2.9.
-  Now requires WordPress 2.9.
+  Now requires WordPress 2.9.  WordPress 2.8.x users can use version 1.0.4.
 * Minor updates to documentation.
 
 = 1.0.4 =
@@ -58,17 +61,17 @@ plug-ins that override these functions.
 = 1.0.3 =
 * December 14, 2009
 * Fixed up readme.
-* Now available in the WordPress plug-in directory.
+* Now available in the WordPress plugin directory.
 
 = 1.0.2 =
 * December 11, 2009
-* Fixed error activating plug-in, extra installation instructions no longer
+* Fixed error activating plugin, extra installation instructions no longer
   necessary.
 
 = 1.0.1 =
 * December 10, 2009
 * Added "Installation process" section to readme, in case of errors activating
-  the plug-in.
+  the plugin.
 
 = 1.0 =
 * December 10, 2009
