@@ -41,8 +41,11 @@ plugins that override these functions.
 
 == Changelog ==
 
-= Development Version =
+= 1.0.6 =
+* Changed the name of the plugin.  I don't think it needs to have my name in
+  the title after all.
 * Minor updates to documentation.
+* Reverted "code collapse" change from 1.0.4.
 
 = 1.0.5 =
 * January 4, 2010

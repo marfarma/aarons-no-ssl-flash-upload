@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Aaron's NO SSL Flash Upload
+Plugin Name: NO SSL Flash Upload
 Plugin URI: http://aaron-kelley.net/tech/wordpress/plugin-flashssl/
 Description: Workaround an "IO error" from the Flash uploader, caused by using an untrusted SSL certificate to secure admin sessions.  This is done by disabling SSL for the Flash uploader.  See the readme for security implications.  Requires WordPress 2.9 or later.
-Version: 1.0.6-pre
+Version: 1.0.6pre
 Author: Aaron A. Kelley
 Author URI: http://aaron-kelley.net/
 */
@@ -94,10 +94,14 @@ function auth_redirect() {
 	if ( $secure && !is_ssl() && false !== strpos($_SERVER['REQUEST_URI'], 'wp-admin') ) {
 		if ( 0 === strpos($_SERVER['REQUEST_URI'], 'http') ) {
 			wp_redirect(preg_replace('|^http://|', 'https://', $_SERVER['REQUEST_URI']));
-			if (!aaron_asyncReqDetect()) { exit(); }
+			if (!aaron_asyncReqDetect()) {
+			    exit();
+			}
 		} else {
 			wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-			if (!aaron_asyncReqDetect()) { exit(); }
+			if (!aaron_asyncReqDetect()) {
+			    exit();
+			}
 		}
 	}
 
@@ -116,7 +120,13 @@ function auth_redirect() {
 		}
 
 		return;  // The cookie is good so we're done
-	} else if (aaron_asyncReqDetect()) { if ( empty($_COOKIE[LOGGED_IN_COOKIE]) || !wp_validate_auth_cookie($_COOKIE[LOGGED_IN_COOKIE], 'logged_in') ) { wp_redirect($login_url); exit(); } return; }
+	} else if (aaron_asyncReqDetect()) {
+	    if ( empty($_COOKIE[LOGGED_IN_COOKIE]) || !wp_validate_auth_cookie($_COOKIE[LOGGED_IN_COOKIE], 'logged_in') ) {
+	        wp_redirect($login_url);
+	        exit();
+	    }
+	    return;
+	}
 
 	// The cookie is no good so force login
 	nocache_headers();
@@ -159,7 +169,10 @@ function wp_parse_auth_cookie($cookie = '', $scheme = '') {
 				$cookie_name = LOGGED_IN_COOKIE;
 				break;
 			default:
-				if ( is_ssl() || aaron_asyncReqDetect() ) { if ( aaron_asyncReqDetect() && !is_ssl() ) { $_COOKIE[SECURE_AUTH_COOKIE] = $_REQUEST['auth_cookie']; }
+				if ( is_ssl() || aaron_asyncReqDetect() ) {
+				    if ( aaron_asyncReqDetect() && !is_ssl() ) {
+				        $_COOKIE[SECURE_AUTH_COOKIE] = $_REQUEST['auth_cookie'];
+				    }
 					$cookie_name = SECURE_AUTH_COOKIE;
 					$scheme = 'secure_auth';
 				} else {
