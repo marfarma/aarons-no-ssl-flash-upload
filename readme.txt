@@ -2,8 +2,8 @@
 Contributors: aaron44126
 Tags: flash, upload, ssl
 Requires at least: 2.9
-Tested up to: 2.9.1
-Stable tag: 1.0.5
+Tested up to: 2.9.2
+Stable tag: 1.0.6
 
 Turns off SSL for the Flash uploader when you have FORCE_SSL_ADMIN enabled, in
 case you are having trouble getting it to work ("IO Error").
@@ -45,7 +45,8 @@ plugins that override these functions.
 * Changed the name of the plugin.  I don't think it needs to have my name in
   the title after all.
 * Minor updates to documentation.
-* Reverted "code collapse" change from 1.0.4.
+* Reverted "code collapse" change from 1.0.4 (no change in functionality, just
+  code style).
 
 = 1.0.5 =
 * January 4, 2010
