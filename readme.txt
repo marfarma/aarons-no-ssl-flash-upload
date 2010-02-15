@@ -42,6 +42,7 @@ plugins that override these functions.
 == Changelog ==
 
 = 1.0.6 =
+* February 15, 2010
 * Changed the name of the plugin.  I don't think it needs to have my name in
   the title after all.
 * Minor updates to documentation.
