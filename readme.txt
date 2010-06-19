@@ -1,9 +1,9 @@
 === Plugin Name ===
 Contributors: aaron44126
 Tags: flash, upload, ssl
-Requires at least: 2.9
-Tested up to: 2.9.2
-Stable tag: 1.0.6
+Requires at least: 3.0
+Tested up to: 3.0
+Stable tag: 1.0.7
 
 Turns off SSL for the Flash uploader when you have FORCE_SSL_ADMIN enabled, in
 case you are having trouble getting it to work ("IO Error").
@@ -40,6 +40,11 @@ wp_validate_auth_cookie functions, and may not work if you are using other
 plugins that override these functions.
 
 == Changelog ==
+
+= 1.0.7 =
+* June 19, 2010
+* Updated the auth_redirect function to match changes made in WordPress 3.0.
+  Now requires WordPress 3.0.  WordPress 2.9.x users may use version 1.0.6.
 
 = 1.0.6 =
 * February 15, 2010

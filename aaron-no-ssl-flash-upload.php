@@ -3,7 +3,7 @@
 Plugin Name: NO SSL Flash Upload
 Plugin URI: http://aaron-kelley.net/tech/wordpress/plugin-flashssl/
 Description: Workaround an "IO error" from the Flash uploader, caused by using an untrusted SSL certificate to secure admin sessions.  This is done by disabling SSL for the Flash uploader.  See the readme for security implications.  Requires WordPress 2.9 or later.
-Version: 1.0.6
+Version: 1.0.7
 Author: Aaron A. Kelley
 Author URI: http://aaron-kelley.net/
 */
@@ -85,10 +85,7 @@ if ( !function_exists('auth_redirect') ) :
 function auth_redirect() {
 	// Checks if a user is logged in, if not redirects them to the login page
 
-	if ( is_ssl() || force_ssl_admin() )
-		$secure = true;
-	else
-		$secure = false;
+	$secure = ( is_ssl() || force_ssl_admin() );
 
 	// If https is required and request is http, redirect
 	if ( $secure && !is_ssl() && false !== strpos($_SERVER['REQUEST_URI'], 'wp-admin') ) {
@@ -122,6 +119,8 @@ function auth_redirect() {
 		return;  // The cookie is good so we're done
 	} else if (aaron_asyncReqDetect()) {
 	    if ( empty($_COOKIE[LOGGED_IN_COOKIE]) || !wp_validate_auth_cookie($_COOKIE[LOGGED_IN_COOKIE], 'logged_in') ) {
+	        $login_url = wp_login_url($redirect, true);
+
 	        wp_redirect($login_url);
 	        exit();
 	    }
@@ -138,7 +137,7 @@ function auth_redirect() {
 
 	$redirect = ( strpos($_SERVER['REQUEST_URI'], '/options.php') && wp_get_referer() ) ? wp_get_referer() : $proto . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 
-	$login_url = wp_login_url($redirect);
+	$login_url = wp_login_url($redirect, true);
 
 	wp_redirect($login_url);
 	exit();
