@@ -2,7 +2,7 @@
 Contributors: aaron44126
 Tags: flash, upload, ssl
 Requires at least: 3.0
-Tested up to: 3.0
+Tested up to: 3.0.3
 Stable tag: 1.0.7
 
 Turns off SSL for the Flash uploader when you have FORCE_SSL_ADMIN enabled, in
