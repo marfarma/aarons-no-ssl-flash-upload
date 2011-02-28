@@ -2,13 +2,13 @@
 /*
 Plugin Name: NO SSL Flash Upload
 Plugin URI: http://aaron-kelley.net/tech/wordpress/plugin-flashssl/
-Description: Workaround an "IO error" from the Flash uploader, caused by using an untrusted SSL certificate to secure admin sessions.  This is done by disabling SSL for the Flash uploader.  See the readme for security implications.  Requires WordPress 2.9 or later.
-Version: 1.0.7
+Description: Workaround an "IO error" from the Flash uploader, caused by using an untrusted SSL certificate to secure admin sessions.  This is done by disabling SSL for the Flash uploader.  See the readme for security implications.  Requires WordPress 3.1 or later.
+Version: 1.0.8
 Author: Aaron A. Kelley
 Author URI: http://aaron-kelley.net/
 */
 
-/*  Copyright 2009-2010  Aaron A. Kelley  (email : aaronkelley@hotmail.com)
+/*  Copyright 2009-2011  Aaron A. Kelley  (email : aaronkelley@hotmail.com)
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -87,6 +87,8 @@ function auth_redirect() {
 
 	$secure = ( is_ssl() || force_ssl_admin() );
 
+	$secure = apply_filters('secure_auth_redirect', $secure);
+
 	// If https is required and request is http, redirect
 	if ( $secure && !is_ssl() && false !== strpos($_SERVER['REQUEST_URI'], 'wp-admin') ) {
 		if ( 0 === strpos($_SERVER['REQUEST_URI'], 'http') ) {
@@ -102,7 +104,12 @@ function auth_redirect() {
 		}
 	}
 
-	if ( $user_id = wp_validate_auth_cookie( '', apply_filters( 'auth_redirect_scheme', '' ) ) ) {
+	if ( is_user_admin() )
+		$scheme = 'logged_in';
+	else
+		$scheme = apply_filters( 'auth_redirect_scheme', '' );
+
+	if ( $user_id = wp_validate_auth_cookie( '',  $scheme) ) {
 		do_action('auth_redirect', $user_id);
 
 		// If the user wants ssl but the session is not ssl, redirect.
