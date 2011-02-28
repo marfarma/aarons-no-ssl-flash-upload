@@ -42,7 +42,7 @@ plugins that override these functions.
 == Changelog ==
 
 = 1.0.8 =
-* February 28, 2010
+* February 28, 2011
 * Updated the auth_redirect function to match changes made in WordPress 3.1.
   Now requires WordPress 3.1.  WordPress 3.0.x users may use version 1.0.7.
 
